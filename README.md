@@ -101,6 +101,50 @@ Bunları saydırmak mümkün,
 	=> nil
 	>
 
+Ararken,
+
+	> y User.tagged_with("awesome").all
+	---
+	- !ruby/object:User
+	  attributes:
+	    id: 1
+	    name: Bobby
+	    created_at: 2012-06-04 06:56:31.410198000 Z
+	    updated_at: 2012-06-04 06:56:31.410198000 Z
+	=> nil
+	> y User.tagged_with("joking").all
+	---
+	- !ruby/object:User
+	  attributes:
+	    id: 1
+	    name: Bobby
+	    created_at: 2012-06-04 06:56:31.410198000 Z
+	    updated_at: 2012-06-04 06:56:31.410198000 Z
+	- !ruby/object:User
+	  attributes:
+	    id: 2
+	    name: Frankie
+	    created_at: 2012-06-04 07:03:04.630137000 Z
+	    updated_at: 2012-06-04 07:03:04.630137000 Z
+	=> nil
+	>
+
+Daha fazlası,
+
+	> # hepsiyle eslessin
+	> User.tagged_with(["awesome", "cool"], :match_all => true)
+
+	> # herhangi birisiyle eslessin
+	> User.tagged_with(["awesome", "cool"], :any => true)
+
+	> # hicbirisiyle eslesmesin
+	> User.tagged_with(["awesome", "cool"], :exclude => true)
+
+Tag ve skill'i şu olanları bul demek için,
+
+	> User.tagged_with(['awesome', 'cool'], :on => :tags, :any => true).
+	       tagged_with(['smart', 'joking'], :on => :skills, :any => true)
+
 # Kaynak
 
 - https://github.com/mbleigh/acts-as-taggable-on
