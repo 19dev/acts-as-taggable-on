@@ -145,6 +145,25 @@ Tag ve skill'i şu olanları bul demek için,
 	> User.tagged_with(['awesome', 'cool'], :on => :tags, :any => true).
 	       tagged_with(['smart', 'joking'], :on => :skills, :any => true)
 
+## Relations
+
+Girdi,
+
+    @bobby = User.find_by_name("Bobby")
+    @bobby.skill_list # => ["jogging", "diving"]
+
+    @frankie = User.find_by_name("Frankie")
+    @frankie.skill_list # => ["hacking"]
+
+    @tom = User.find_by_name("Tom")
+    @tom.skill_list # => ["hacking", "jogging", "diving"]
+
+İlişki olanları bul,
+
+    @tom.find_related_skills # => [<User name="Bobby">,<User name="Frankie">]
+    @bobby.find_related_skills # => [<User name="Tom">]
+    @frankie.find_related_skills # => [<User name="Tom">]
+
 # Kaynak
 
 - https://github.com/mbleigh/acts-as-taggable-on
